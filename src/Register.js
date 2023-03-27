@@ -8,15 +8,26 @@ export default function Register() {
     const [register, setRegister] = useState(false);
 
     const handleSubmit = () => {
+        //set configurations
+        const configuration = {
+            method: "post",
+            url: "https://nodejs-mongodb-auth-server.herokuapp.com/register",
+            data: {
+                email,
+                password
+            }
+        }
+
         //make the API call
-        axios.post("https://nodejs-mongodb-auth-server.herokuapp.com/register", {email, password})
-        .then(() => 
+        axios(configuration).then((result) => 
         {
+            console.log("result");
             setRegister(true);
             setEmail("");
             setPassword("");
         })
         .catch((error) => {
+            console.log("error");
             error = new Error();
         });
     }
